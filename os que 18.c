@@ -2,7 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
-int main(void)
+int main()
 {
         int    i, fd[2], nbytes;
         pid_t   childpid;
