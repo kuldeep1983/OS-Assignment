@@ -1,13 +1,14 @@
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
+#include<stdlib.h>
+#include<string.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<stdio.h>
 int main()
 {
-        int    i, fd[2], nbytes;
-        pid_t   childpid;
-        char    string[] = "Hello, world!\n";
-        char    readbuffer[80];
+        int  i,fd[2], n;
+        pid_t childpid;
+        char string[]="Hello, world!\n";
+        char rb[20];
         pipe(fd);
         if((childpid = fork()) == -1)
         {
@@ -23,19 +24,18 @@ int main()
         else
         {
                 close(fd[1]);
-                nbytes = read(fd[0], readbuffer, sizeof(readbuffer));
-                printf("Received string: %s", readbuffer);
-               int  max=strlen(readbuffer);
-                for(int i=0;i<max-1;i++)
+                n = read(fd[0], rb, sizeof(rb));
+                printf("input string: %s", rb);
+                for(i=0;i<sizeof(rb)-1;i++)
                 {
-                  if(readbuffer[i]>64 && readbuffer[i]<91)
-                   readbuffer[i]+=32;
-                  else if(readbuffer[i]>96 && readbuffer[i]<123)
-                   readbuffer[i]-=32;
+                  if(rb[i]>64 && rb[i]<91)
+                   rb[i]+=32;
+                  else if(rb[i]>96 && rb[i]<123)
+                   rb[i]-=32;
                   else
-                  readbuffer[i]=readbuffer[i];
+                  rb[i]=rb[i];
                   }
-                printf("output is %s",readbuffer);
+                printf("output string: %s",rb);
         }
         return(0);
 }
