@@ -7,10 +7,11 @@ int main()
 {
         int  i,fd[2], n;
         pid_t childpid;
-        char string[]="Hello, world!\n";
+        char string[]="Hi There\n";
         char rb[20];
         pipe(fd);
-        if((childpid = fork()) == -1)
+        childpid=fork();
+        if(childpid==-1)
         {
                 perror("fork");
                 exit(1);
